@@ -24,4 +24,4 @@ jobs:
         uses: actions/checkout@v2
       - name: Run mirror script
         run: |
-          ./bin/mirror.sh
+          ./bin/mirror.sh ${{ env.REMOTE_URL }} ${{ env.TOKEN }} ${{ env.SRC_DIR }} ${{ env.DEST_DIR }} ${{ env.MSG }}
