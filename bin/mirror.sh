@@ -3,17 +3,19 @@
 # Github repo Directory Mirror
 # Synopsis: Script used to push local directory to remote repo (mirror)
 # ARGUMENTS
-REMOTE_TOKEN=${1}
-SRC_DIR=${2}
-DEST_DIR=${3}
+REMOTE_URL=${1}
+REMOTE_TOKEN=${2}
+SRC_DIR=${3}
+DEST_DIR=${4}
+MSG=${5}
 #========================================================================#
 
-git remote add ops git@github.com:jon-funk/copycat-workflow-example-b.git
+git remote add ops $REMOTE_URL
 git fetch ops
-git checkout ops/mirror
+git checkout ops/main mirror
+
 rsync -avu --delete "$SRC_DIR" "$DEST_DIR"
-git add 
-
-
-
-
+git checkout ops/main
+git add $DEST_DIR
+git commit -m "$MSG"
+git push ops HEAD:main

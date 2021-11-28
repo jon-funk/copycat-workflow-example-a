@@ -1,0 +1,27 @@
+---
+name: Mirror Operations
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - operations/**
+
+env:
+  TOKEN: ""
+  REMOTE_URL: git@github.com:jon-funk/copycat-workflow-example-b.git
+  SRC_DIR: operations/
+  DEST_DIR: mirror/
+  MSG: Automated operations sync
+
+jobs:
+  mirror:
+    name: mirror
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run mirror script
+        run: |
+          ./bin/mirror.sh
